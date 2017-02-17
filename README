@@ -1,0 +1,40 @@
+### Spark Bot for AWS Lambda ###
+
+This is a template to create a Spark Bot using AWS Lambda as the external service.
+
+The high level process is:
+1) Create a new Spark Bot at https://developer.ciscospark.com/apps.html
+	!!Ensure you save the Access Token!!
+2) Create the AWS API Gateway & Lambda Function
+3) Register the Webhook
+4) Test the bot by sending a direct message from Spark to your bot.
+
+
+AWS API GATEWAY
+Ensure to turn off all authentication
+
+LAMBDA FUNCTION
+Ensure to create an Environment variable called SPARKAPITOKEN with with token from https://developer.ciscospark.com/apps.html
+
+
+REGISTER THE WEBHOOK
+Import Cisco Spark.postman_collection.json into Postman.
+	-Replace $$BOT_AUTH_TOKEN$$ with token from https://developer.ciscospark.com/apps.html
+	-Replace $$AWS_API_GATEWAY_TRIGGER$$ with API Gateway Trigger url
+	-Replace $$BOT_ID$$ with self id from https://api.ciscospark.com/v1/people/me
+	
+
+TESTING
+Lambda Test Template 
+{
+  "actorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9lNWFjYTVmMy00MzBiLTQxNjEtYWMxYS04ZWVhYjYxMDc2NTY",
+  "data": {
+    "roomId": "Y2lzY29zcGFyazovL3VzL1JPT00vMWY0Nzk1MjItYjViNS0zMTA2LWFhNWEtZjY1ZTZkMGRiNjg2",
+    "id": "Y2lzY29zcGFyazovL3VzL01FU1NBR0UvNjc1NTZhZjAtZjQyNC0xMWU2LWI4Y2MtNWJhMmYxNGFhNjVi"
+  },
+  "event": "created"
+}
+
+
+IMPROVEMENT GOALS
+1) replace 'requests' library with 'httplib' to avoid having to import additional package into lambda
