@@ -14,7 +14,10 @@ AWS API GATEWAY
 Ensure to turn off all authentication
 
 LAMBDA FUNCTION
+Zip project-dir and upload to lambda (ensure that awslambdasparkbotbasictemplate.py is included as lambda_function.py)
+be sure to zip the contents of the project-dir, not the folder itself. lambda_function.py MUST be in the root.
 Ensure to create an Environment variable called SPARKAPITOKEN with with token from https://developer.ciscospark.com/apps.html
+Ensure that Handler in the lambda configuration is set to lambda_function.lambda_handler
 
 
 REGISTER THE WEBHOOK
