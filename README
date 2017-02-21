@@ -14,8 +14,15 @@ AWS API GATEWAY
 Ensure to turn off all authentication
 
 LAMBDA FUNCTION
-Zip up the contents of the project upload to lambda ensure that lambda_function.py is in the root dir. 
-Ensure to create an Environment variable called SPARKAPITOKEN with with token from https://developer.ciscospark.com/apps.html
+AWS Lambda requires that all libraries are in a .zip file AT THE ROOT level.
+See http://docs.aws.amazon.com/lambda/latest/dg/lambda-python-how-to-create-deployment-package.html
+
+pip install ciscosparkapi -t ./project-dir
+cp lambda_function.py ./project-dir
+cd project-dir;zip -r ../mylambdafunction.zip ./ -x \*.pyc ; cd ..
+
+Zip up the contents of the project-dir upload to lambda ensure that lambda_function.py is in the root dir. 
+Ensure to create an Environment variable called SPARK_ACCESS_TOKEN with with token from https://developer.ciscospark.com/apps.html
 Ensure that Handler in the lambda configuration is set to lambda_function.lambda_handler
 
 
@@ -36,7 +43,3 @@ Lambda Test Template
   },
   "event": "created"
 }
-
-
-IMPROVEMENT GOALS
-1) replace 'requests' library with 'httplib' to avoid having to import additional package into lambda
